@@ -1,1 +1,14 @@
-tests
+ui/tests/test_demo.py
+from playwright.sync_api import sync_playwright
+
+
+def test_open_github():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
+
+        page.goto("https://github.com")
+
+        assert "GitHub" in page.title()
+
+        browser.close()
